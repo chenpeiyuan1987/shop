@@ -1,17 +1,23 @@
 package org.yuan.demo.shop.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yuan.demo.shop.entity.User;
 import org.yuan.demo.shop.entity.external.Result;
+import org.yuan.demo.shop.service.UserService;
 
-@Api("")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api("用户模块")
 @RestController
 @RequestMapping("user")
 public class UserController {
+    
+    @Autowired
+    private UserService userService;
 
     /**
      * 用户登录
@@ -26,11 +32,14 @@ public class UserController {
         if (!StringUtils.hasText(param.getPassword())) {
             return Result.failure("账号密码为空");
         }
+        User user = userService.signIn(param.getUsername(), param.getPassword());
+        /*
         if (!param.getUsername().equals("chen") || !param.getPassword().equals("1234")) {
             return Result.failure("账号名称或者密码错误");
         }
-        
-        return Result.success(param);
+        */
+        user.setPassword(null);
+        return Result.success(user);
     }
     
     /**

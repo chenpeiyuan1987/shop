@@ -7,3 +7,6 @@ CREATE TABLE `shop`.`user` (
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 COMMENT = 'save user info';
+
+INSERT INTO `user` (`id`, `username`, `password`, `phone`, `email`) 
+VALUES ('1', 'chen', '1234', '13646514654', 'chenpeiyuan1987@163.com');

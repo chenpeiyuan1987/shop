@@ -3,13 +3,14 @@
 <mapper namespace="org.yuan.demo.shop.mapper.UserMapper">
     <resultMap id="ResultMap" type="org.yuan.demo.shop.entity.User">
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="username" property="userName" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="ColumnList">
-        id, username, password, phone
+        id, username, password, phone, email
     </sql>
 
     <select id="selectList" resultMap="ResultMap" parameterType="java.util.Map">
