@@ -1,10 +1,14 @@
 package org.yuan.demo.shop.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yuan.demo.shop.entity.external.Result;
 
+@Api("")
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -13,6 +17,7 @@ public class UserController {
      * 用户登录
      * @return
      */
+    @ApiOperation("用户登录接口")
     @RequestMapping("signIn")
     public Result signIn(UserParam param) {
         if (!StringUtils.hasText(param.getUsername())) {
@@ -32,6 +37,7 @@ public class UserController {
      * 用户注册
      * @return
      */
+    @ApiOperation("用户注册接口")
     @RequestMapping("signUp")
     public Result signUp(UserParam param) {
         if (!StringUtils.hasText(param.getUsername())) {
