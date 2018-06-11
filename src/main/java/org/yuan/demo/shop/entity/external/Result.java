@@ -1,5 +1,6 @@
 package org.yuan.demo.shop.entity.external;
 
+
 public class Result {
     // 成功编码
     public static final int SUCCESS = 0;
@@ -13,6 +14,9 @@ public class Result {
     // 结果数据
     private Object data;
     
+    public Result() {
+    }
+
     public Result(Integer code, String info, Object data) {
         this.code = code;
         this.info = info;

@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="suite" verbose="1">
+     
+     <test name="user">
+        <classes>
+            <class name="org.yuan.demo.shop.controller.UserControllerTest"></class>
+        </classes>
+     </test>
+     
+</suite>
