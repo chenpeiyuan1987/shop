@@ -41,7 +41,7 @@ public class UserControllerTest {
     
     @Test(dataProvider="provideSignUpUsers")
     public void testSignUpFailure(String username, String password, int expect) throws Exception {
-        HttpGet request = new HttpGet(getSignInUrl(username, password));
+        HttpGet request = new HttpGet(getSignUpUrl(username, password));
         Result result = result(request);
         
         Assert.assertEquals(result.getCode().intValue(), expect);
@@ -50,21 +50,21 @@ public class UserControllerTest {
     @DataProvider
     private Object[][] provideSignInUsers() {
         return new Object[][]{
-            {"",        "",     1},
-            {"chen",    "",     1},
-            {"",        "1234", 1},
-            {"yuan",    "1234", 1},
-            {"chen",    "123",  1},
+            {"",        "",     10002},
+            {"",        "1234", 10002},
+            {"chen",    "",     10003},
+            {"yuan",    "1234", 10001},
+            {"chen",    "123",  10001},
         };
     }
     
     @DataProvider
     private Object[][] provideSignUpUsers() {
         return new Object[][]{
-            {"",        "",     1},
-            {"chen",    "",     1},
-            {"chen",    "123",  1},
-            {"yuan",    "", 1},
+            {"",        "",     10012},
+            {"",        "1234", 10012},
+            {"chen",    "",     10013},
+            {"chen",    "1234", 10011},
         };
     }
     

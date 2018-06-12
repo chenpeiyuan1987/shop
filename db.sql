@@ -1,5 +1,7 @@
-# Add User Tableuseruser
-CREATE TABLE `shop`.`user` (
+# Add User Table
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
