@@ -1,4 +1,4 @@
-package org.yuan.demo.shop;
+package org.yuan.demo.shop.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
