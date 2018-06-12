@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yuan.demo.shop.entity.User;
 import org.yuan.demo.shop.entity.external.Result;
+import org.yuan.demo.shop.error.ShopMessage;
 import org.yuan.demo.shop.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+import static org.yuan.demo.shop.error.ShopException.error;
 
 @Api("用户模块")
 @RestController
@@ -23,21 +26,17 @@ public class UserController {
      * 用户登录
      * @return
      */
-    @ApiOperation("用户登录接口")
+    @ApiOperation("用户登录")
     @RequestMapping("signIn")
     public Result signIn(UserParam param) {
         if (!StringUtils.hasText(param.getUsername())) {
-            return Result.failure("账号名称为空");
+            throw error(ShopMessage.SIGN_IN_2);
         }
         if (!StringUtils.hasText(param.getPassword())) {
-            return Result.failure("账号密码为空");
+            throw error(ShopMessage.SIGN_IN_3);
         }
         User user = userService.signIn(param.getUsername(), param.getPassword());
-        /*
-        if (!param.getUsername().equals("chen") || !param.getPassword().equals("1234")) {
-            return Result.failure("账号名称或者密码错误");
-        }
-        */
+        
         user.setPassword(null);
         return Result.success(user);
     }
@@ -46,20 +45,23 @@ public class UserController {
      * 用户注册
      * @return
      */
-    @ApiOperation("用户注册接口")
+    @ApiOperation("用户注册")
     @RequestMapping("signUp")
     public Result signUp(UserParam param) {
         if (!StringUtils.hasText(param.getUsername())) {
-            return Result.failure("账号名称为空");
+            throw error(ShopMessage.SIGN_UP_2);
         }
         if (!StringUtils.hasText(param.getPassword())) {
-            return Result.failure("账号密码为空");
-        }
-        if (param.getUsername().endsWith("chen")) {
-            return Result.failure("账号名称已被注册");
+            throw error(ShopMessage.SIGN_UP_3);
         }
         
-        return Result.success(param);
+        User user = new User();
+        user.setUsername(param.getUsername());
+        user.setPassword(param.getPassword());
+        user = userService.signUp(user);
+        
+        user.setPassword(null);
+        return Result.success(user);
     }
     
     //----------------------------------------------------------

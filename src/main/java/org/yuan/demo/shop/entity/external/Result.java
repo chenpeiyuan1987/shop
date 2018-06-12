@@ -53,4 +53,7 @@ public class Result {
     public static Result failure(String info) {
         return new Result(FAILURE, info, null);
     }
+    public static Result failure(Integer code, String info) {
+        return new Result(code, info, null);
+    }
 }
