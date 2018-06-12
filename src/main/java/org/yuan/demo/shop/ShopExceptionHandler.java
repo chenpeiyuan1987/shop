@@ -16,14 +16,23 @@ public class ShopExceptionHandler {
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Result handle(Exception ex) {
-        log.error(ex.getMessage(), ex);
         
         if (ex instanceof ShopException) {
             ShopException shopException = (ShopException) ex;
             ShopMessage sm = shopException.getShopMessage();
+            
+            // 打印日志
+            StackTraceElement element = ex.getStackTrace()[1];;
+            String msg = String.format("[%s: %s] ==> %s", 
+                sm.getCode(), sm.getInfo(), element.toString());
+            log.error(msg);
+            
+            // 返回结果
             return Result.failure(sm.getCode(), sm.getInfo());
         }
         else {
+            log.error(ex.getMessage(), ex);
+            
             String info = ex.getMessage();
             Integer code = ShopMessage.FAILURE.getCode();
             return Result.failure(code, info);
