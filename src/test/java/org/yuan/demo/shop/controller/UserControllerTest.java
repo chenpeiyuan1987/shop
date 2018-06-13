@@ -7,6 +7,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.yuan.demo.shop.entity.external.Result;
@@ -14,7 +15,12 @@ import org.yuan.demo.shop.entity.external.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserControllerTest {
-
+    
+    @BeforeClass
+    public void initData() {
+        SqlUtil.run("db.sql");
+    }
+    
     @Test
     public void testSignInSuccess() throws Exception {
         HttpGet request = new HttpGet(getSignInUrl("chen", "1234"));
